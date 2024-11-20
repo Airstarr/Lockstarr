@@ -1,0 +1,29 @@
+[project]
+name = 'lockstarr-contract'
+description = ''
+authors = []
+telemetry = true
+cache_dir = '.\.cache'
+requirements = []
+[contracts.Lock-kini]
+path = 'contracts/Lock-kini.clar'
+clarity_version = 3
+epoch = 3.0
+
+[contracts.event-budgeting]
+path = 'contracts/event-budgeting.clar'
+clarity_version = 3
+epoch = 3.0
+
+[contracts.fund-management]
+path = 'contracts/fund-management.clar'
+clarity_version = 3
+epoch = 3.0
+[repl.analysis]
+passes = ['check_checker']
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
