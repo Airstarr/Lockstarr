@@ -100,6 +100,7 @@
   )
 )
 
+
 ;; Contribute to the group's fund
 (define-public (contribute (group-id uint) (amount uint))
   (let
@@ -212,4 +213,3 @@
 (define-read-only (get-member-vote (group-id uint) (member principal))
   (map-get? member-votes { group-id: group-id, member: member })
 )
-
