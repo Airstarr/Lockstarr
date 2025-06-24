@@ -19,6 +19,11 @@ epoch = 3.0
 path = 'contracts/fund-management.clar'
 clarity_version = 3
 epoch = 3.0
+
+[contracts.savings-group]
+path = 'contracts/savings-group.clar'
+clarity_version = 3
+epoch = 3.0
 [repl.analysis]
 passes = ['check_checker']
 
