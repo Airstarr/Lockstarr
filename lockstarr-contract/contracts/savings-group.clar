@@ -74,7 +74,7 @@
     )
     (map-set group-members
       { group-id: new-group-id, member: tx-sender }
-      { joined-at: block-height, contribution: u0 }
+      { joined-at: stacks-block-height, contribution: u0 }
     )
     (var-set group-nonce new-group-id)
     (ok new-group-id)
@@ -90,7 +90,7 @@
     (asserts! (is-none (map-get? group-members { group-id: group-id, member: tx-sender })) err-already-member)
     (map-set group-members
       { group-id: group-id, member: tx-sender }
-      { joined-at: block-height, contribution: u0 }
+      { joined-at: stacks-block-height, contribution: u0 }
     )
     (map-set savings-groups
       { group-id: group-id }
@@ -140,7 +140,7 @@
           description: description,
           votes-for: u0,
           votes-against: u0,
-          expiration: (+ block-height u144)  ;; Set expiration to 24 hours (assuming 10-minute block times)
+          expiration: (+ stacks-block-height u144)  ;; Set expiration to 24 hours (assuming 10-minute block times)
         })
       })
     )
@@ -157,7 +157,7 @@
       (member-vote (default-to { voted: false, vote: false } (map-get? member-votes { group-id: group-id, member: tx-sender })))
     )
     (asserts! (is-some (map-get? group-members { group-id: group-id, member: tx-sender })) err-not-member)
-    (asserts! (< block-height (get expiration proposal)) err-proposal-expired)
+    (asserts! (< stacks-block-height (get expiration proposal)) err-proposal-expired)
     (asserts! (not (get voted member-vote)) err-vote-exists)
     (map-set member-votes
       { group-id: group-id, member: tx-sender }
@@ -183,7 +183,7 @@
       (group (unwrap! (map-get? savings-groups { group-id: group-id }) err-group-not-found))
       (proposal (unwrap! (get active-proposal group) err-no-active-proposal))
     )
-    (asserts! (>= block-height (get expiration proposal)) err-proposal-expired)
+    (asserts! (>= stacks-block-height (get expiration proposal)) err-proposal-expired)
     (asserts! (> (get votes-for proposal) (get votes-against proposal)) err-insufficient-funds)
     (try! (as-contract (stx-transfer? (get amount proposal) tx-sender (get proposer proposal))))
     (map-set savings-groups
