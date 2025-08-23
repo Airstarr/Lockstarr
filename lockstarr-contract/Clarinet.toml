@@ -5,6 +5,10 @@ authors = []
 telemetry = true
 cache_dir = '.\.cache'
 requirements = []
+[contracts.Contract-fund-locking]
+path = 'contracts/Contract-fund-locking.clar'
+clarity_version = 3
+epoch = 3.0
 
 [contracts.custom-reminders]
 path = 'contracts/custom-reminders.clar'
